@@ -1,0 +1,31 @@
+24.12.2025 
+- İlk tasarım oluşturuldu. 
+- Mobil ve Web kullanımı için iki mod tasarlandı. 
+- Koyu mod açık mod seçeneği eklendi. 
+- Liste Detay Sayfası - Tıklandığında listedeki kitapları gösteren sayfa
+- Liste Düzenleme - Mevcut listeleri düzenleme/silme
+- Listeden Kitap Çıkarma 
+- İstatistikler - Listede okuma ilerlemesi, tamamlanan kitap sayısı
+- Mobilde yapılan değişiklikler: 
+    - Mobil modda NavigationBar yerine AppBar kullanıldı. 
+    - Kitap Ekleme FAB butonu eklendi. 
+- Dasboard Modda yapılan değişiklikler: 
+- Dasboard modda Sidebar tasarlandı. 
+
+
+
+25.12.2025
+- Listeleme sayfasında sağ tık ile düzenleme ve silme seçenekleri eklendi. 
+- 
+
+
+
+
+Yapılacaklar: 
+
+- Ayarlar sayfası
+- Profil sayfası
+
+
+
+

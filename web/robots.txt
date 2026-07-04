@@ -1,0 +1,12 @@
+# Liblibe Web - robots.txt
+# https://www.liblibe.com.tr
+
+User-agent: *
+Allow: /
+
+# Sitemap location (create if you have one)
+# Sitemap: https://www.liblibe.com.tr/sitemap.xml
+
+# Disallow paths that shouldn't be indexed (add as needed)
+# Disallow: /api/
+# Disallow: /admin/

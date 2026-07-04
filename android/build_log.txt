@@ -1,0 +1,17 @@
+﻿Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+> Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle:compileKotlin UP-TO-DATE
+> Task :gradle:compileJava NO-SOURCE
+> Task :gradle:compileGroovy NO-SOURCE
+> Task :gradle:pluginDescriptors UP-TO-DATE
+> Task :gradle:processResources UP-TO-DATE
+> Task :gradle:classes UP-TO-DATE
+> Task :gradle:jar UP-TO-DATE
+
+> Configure project :app
+WARNING: The option setting 'android.overridePathCheck=true' is experimental.
+The current default is 'false'.
+w: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:43:55: No cast needed
+w: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:44:61: No cast needed
+w: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:46:65: No cast needed
+4 actionable tasks: 4 up-to-date

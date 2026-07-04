@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="Liblibe">
+  <style>
+    html {
+      background-color: #0B1412;
+    }
+    body {
+      background-color: #0B1412; /* Dark — matches loading screen */
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    #loading_screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #0B1412;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+    .loader-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 24px;
+      animation: pulse 2s infinite ease-in-out;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+  </style>
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Liblibe">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Liblibe</title>
+  <meta name="google-signin-client_id" content="676632601870-sjomhag968529tubjtgdc3i3oulcflti.apps.googleusercontent.com">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div id="loading_screen">
+    <img class="loader-logo" src="icons/Icon-192.png" alt="Liblibe Logo">
+  </div>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Robust loading screen removal:
+      // 1. Listen for the native flutter-first-frame event
+      window.addEventListener('flutter-first-frame', function() {
+        window.hideLoadingScreen();
+      });
+
+      // 2. Fallback: If for some reason the frame event doesn't fire within 15s, hide it anyway
+      setTimeout(function() {
+        window.hideLoadingScreen();
+      }, 15000);
+    });
+
+    // Fallback if flutter-first-frame doesn't fire (some browsers/versions)
+    // We can also call this from Dart: js.context.callMethod('hideLoadingScreen');
+    window.hideLoadingScreen = function() {
+      var loadingScreen = document.getElementById('loading_screen');
+      if (loadingScreen) {
+        loadingScreen.style.opacity = '0';
+        setTimeout(function() {
+          loadingScreen.remove();
+        }, 500);
+      }
+    };
+
+    // Keyboard handling intentionally removed for diagnostic test.
+    // Flutter should handle visualViewport resize natively.
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

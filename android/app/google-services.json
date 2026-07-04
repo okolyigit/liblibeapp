@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "676632601870",
+    "project_id": "liblibe-aef1b",
+    "storage_bucket": "liblibe-aef1b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676632601870:android:ac3fe67ade22753be1635f",
+        "android_client_info": {
+          "package_name": "com.liblibe.liblibeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676632601870-mjaodp921rf9f4s0l4hs2n83uqk69pv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liblibe.liblibeapp",
+            "certificate_hash": "18ef34aeff83e6d005c92f676f30eb40e18e1fed"
+          }
+        },
+        {
+          "client_id": "676632601870-sjomhag968529tubjtgdc3i3oulcflti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAixy31n4McQ2szn8tkuXY6RMFGX69mseY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676632601870-sjomhag968529tubjtgdc3i3oulcflti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

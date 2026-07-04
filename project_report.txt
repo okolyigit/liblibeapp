@@ -1,0 +1,93 @@
+# LiblibeApp - Proje Gelişim Raporu
+
+Bu rapor, Liblibe uygulamasının mevcut durumunu, teknik altyapısını, geliştirilen özellikleri ve proje süresince izlenen geliştirme adımlarını kapsamaktadır.
+
+## 1. Proje Özeti
+**Liblibe**, kullanıcıların kişisel kütüphanelerini dijital ortamda yönetmelerini, kitaplarını takip etmelerini ve okuma alışkanlıklarını izlemelerini sağlayan, Flutter ile geliştirilmiş, Firebase tabanlı modern bir kütüphane yönetim uygulamasıdır.
+
+**Platformlar:** Android, iOS, Web (Dashboard Modu), Windows (Masaüstü desteği altyapısı mevcut).
+
+## 2. Teknik Altyapı ve Mimari
+Proje, **Servis Odaklı Mimari (Service-Oriented Architecture)** izlenerek yapılandırılmıştır. İş mantığı, veri erişimi ve UI (Arayüz) katmanları birbirinden ayrılmıştır.
+
+### Temel Teknolojiler
+- **Framework:** Flutter & Dart
+- **Backend & Veritabanı:** Firebase (Auth, Firestore, Storage)
+- **State Management:** ValueNotifier & StreamBuilder (Reaktif yapı)
+- **UI Kit:** Material 3, Phosphor Icons, Glassmorphism efektleri
+- **Kamera/Tarama:** Mobile Scanner
+
+### Servis Katmanı (`/lib/services`)
+Uygulama mantığı merkezi servisler üzerinden yönetilmektedir:
+- **AuthService:** Kullanıcı oturum yönetimi (Giriş, Kayıt, Çıkış, Şifre Sıfırlama).
+- **BookService:** Kitap CRUD (Ekleme, Okuma, Güncelleme, Silme) işlemleri.
+- **BookApiService:** Google Books API entegrasyonu ile ISBN üzerinden kitap verisi çekme.
+- **LibraryService:** Kütüphane oluşturma ve paylaşım mantığı.
+- **ListService:** Özel okuma listeleri yönetimi.
+- **ActivityService:** Okuma aktivitelerinin takvime işlenmesi.
+- **NotificationService:** Firebase Cloud Messaging (FCM) ve yerel bildirimler.
+- **PreferencesService:** Tema ve kullanıcı tercihlerinin yerel depolanması (`shared_preferences`).
+
+## 3. Geliştirilen Özellikler (Features)
+
+### A. Kimlik Doğrulama (Authentication)
+- **E-posta & Şifre:** Kayıt olma ve giriş yapma.
+- **Onboarding:** Yeni kullanıcılar için karşılama ekranları.
+- **Güvenlik:** Kullanıcı sözleşmesi ve gizlilik politikası onayı.
+
+### B. Kitap Yönetimi
+- **Kapsamlı Ekleme Seçenekleri:**
+  - **Barkod Tarama:** Kitap arkasındaki ISBN barkodunu kamerayla okutarak otomatik veri çekme.
+  - **ISBN ile Arama:** Manuel ISBN girişi ile kitap bilgilerini getirme (Google Books API).
+  - **Manuel Giriş:** Kitap kapağı, yazarı, yayınevi vb. bilgilerin elle girilmesi.
+- **Kitap Detayları:**
+  - Kitap durumu (Okunuyor, Okundu, Okunacak).
+  - Puanlama ve Notlar.
+  - Kategori ve Tür etiketleri.
+
+### C. Organizasyon (Kütüphaneler ve Listeler)
+- **Çoklu Kütüphane Desteği:** Kullanıcılar birden fazla kütüphane oluşturabilir (örn: "Ev", "Ofis").
+- **Kütüphane Paylaşımı:** Kütüphaneler başka kullanıcılarla paylaşılabilir (Sahiplik ve Görüntüleme yetkileri).
+- **Okuma Listeleri:** Kullanıcılar özel listeler oluşturup kitaplarını gruplayabilir.
+
+### D. Aktivite ve Takip
+- **Okuma Takvimi:** Kullanıcının hangi günlerde kitap okuduğu veya kitap bitirdiği takvim üzerinde görselleştirilir.
+- **İstatistikler:** Okunan sayfa sayısı, bitirilen kitap sayısı gibi veriler (Altyapı hazır).
+
+### E. Kullanıcı Arayüzü (UI/UX)
+- **Tema Desteği:**
+  - **Aydınlık (Light) Mod**
+  - **Karanlık (Dark) Mod**
+  - **OLED (Tam Siyah) Modu:** Pil tasarrufu ve estetik için.
+- **Responsive Tasarım:**
+  - **Mobil:** Alt navigasyon çubuğu (Bottom Navigation Bar).
+  - **Web/Tablet:** Sol tarafa sabitlenen, daraltılabilir sidebar menü (Dashboard görünümü).
+- **Glassmorphism:** Menüler ve kartlarda buzlu cam efekti kullanılarak modern bir görünüm sağlandı.
+
+## 4. Geliştirme Süreci ve Yapılan İşlemler
+Proje süresince gerçekleştirilen ana geliştirmeler kronolojik ve mantıksal sıraya göre şöyledir:
+
+1.  **Temel Kurulum:** Flutter projesinin oluşturulması ve Firebase bağlantılarının yapılması.
+2.  **UI İskeleti:**
+    - Sidebar (Yan menü) ve Dashboard yapısının kurulması.
+    - Mobil ve Web uyumlu "Responsive" yapının oturtulması.
+    - Tema altyapısının (Light/Dark/Black) kurulması.
+3.  **Kitap Entegrasyonu:**
+    - `AddBookScreen` ile gelişmiş kitap ekleme formunun kodlanması.
+    - Google Books API ve Open Library API entegrasyonu ile kapak resmi ve meta veri çekme.
+4.  **Barkod Tarayıcı:** `mobile_scanner` kütüphanesi ile kamera entegrasyonu, tarama alanı görselleştirmesi ve sesli/titreşimli geri bildirimler.
+5.  **Refactoring (Kod İyileştirme):**
+    - Başlangıçta UI içine gömülü olan veritabanı işlemlerinin `Services` klasörüne taşınması (Clean Code).
+    - `kitap_ekle_sayfasi.dart` gibi eski yapıların modernize edilerek `add_book_screen.dart` yapısına geçiş hazırlığı.
+6.  **Bildirim Sistemi:** Firebase Messaging kurulumu, izinlerin yönetimi ve uygulama içi bildirim balonlarının (Toast/Snackbar) özelleştirilmesi.
+7.  **Hata Düzeltmeleri ve İyileştirmeler:**
+    - Grid yapısındaki kayma sorunlarının giderilmesi.
+    - İkon setinin `phosphor_flutter` ile standardize edilmesi.
+    - Klavye açıldığında navigasyon barın gizlenmesi gibi UX iyileştirmeleri.
+8.  **Yayın Hazırlığı:**
+    - Uygulama ikonlarının (Launcher Icon) ayarlanması.
+    - `pubspec.yaml` sürüm güncellemeleri.
+    - Web sürümü için performans ve kamera çözünürlüğü ayarları.
+
+## 5. Sonuç
+Liblibe, temel CRUD işlemlerinin ötesine geçerek, sosyal özellikler (paylaşım), donanım entegrasyonu (kamera/barkod) ve gelişmiş bir kullanıcı deneyimi (tema/takvim) sunan olgun bir uygulama haline gelmiştir. Kod tabanı, yeni özelliklerin eklenmesine açık, modüler ve sürdürülebilir bir yapıdadır.

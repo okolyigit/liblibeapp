@@ -1,0 +1,17 @@
+# Liblibe Security Contact Information
+# https://www.liblibe.com.tr/.well-known/security.txt
+
+# Security vulnerabilities can be reported to:
+Contact: mailto:security@liblibe.com.tr
+
+# Expiration date for this file (update annually)
+Expires: 2027-01-05T00:00:00.000Z
+
+# Preferred languages for communication
+Preferred-Languages: tr, en
+
+# Acknowledgment policy
+# Acknowledgments: https://www.liblibe.com.tr/security/thanks
+
+# Optional: Link to security policy
+# Policy: https://www.liblibe.com.tr/security-policy

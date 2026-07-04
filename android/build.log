@@ -1,0 +1,53 @@
+> Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle:compileKotlin UP-TO-DATE
+> Task :gradle:compileJava NO-SOURCE
+> Task :gradle:compileGroovy NO-SOURCE
+> Task :gradle:pluginDescriptors UP-TO-DATE
+> Task :gradle:processResources UP-TO-DATE
+> Task :gradle:classes UP-TO-DATE
+> Task :gradle:jar UP-TO-DATE
+
+> Configure project :app
+e: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:37:43: Unresolved reference: util
+e: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:40:46: Unresolved reference: io
+w: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:43:55: No cast needed
+w: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:44:61: No cast needed
+e: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:45:69: Expression expected, but a package name found
+w: file:///C:/Projects/liblibeapp/android/app/build.gradle.kts:46:65: No cast needed
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file 'C:\Projects\liblibeapp\android\app\build.gradle.kts' line: 37
+
+* What went wrong:
+Script compilation errors:
+
+  Line 37:             val keystoreProperties = java.util.Properties()
+                                                     ^ Unresolved reference: util
+
+  Line 40:                 keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))
+                                                        ^ Unresolved reference: io
+
+  Line 43:             keyAlias = keystoreProperties["keyAlias"] as String?
+                                                                 ^ No cast needed
+
+  Line 44:             keyPassword = keystoreProperties["keyPassword"] as String?
+                                                                       ^ No cast needed
+
+  Line 45:             storeFile = keystoreProperties["storeFile"]?.let { file(it) }
+                                                                               ^ Expression expected, but a package name found
+
+  Line 46:             storePassword = keystoreProperties["storePassword"] as String?
+                                                                           ^ No cast needed
+
+6 errors
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 2s
+4 actionable tasks: 4 up-to-date

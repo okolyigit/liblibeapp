@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "appTitle": "Liblibe",
+  "@appTitle": {
+    "description": "Application name shown in the OS task switcher."
+  },
+  "actionCancel": "Cancel",
+  "actionOk": "OK",
+  "actionDelete": "Delete",
+  "actionSave": "Save",
+  "actionRetry": "Retry",
+  "genericErrorTitle": "Something went wrong",
+  "offline": "No internet connection",
+  "validationRequiredField": "This field cannot be empty",
+  "validationEmailRequired": "E-mail address is required",
+  "validationEmailInvalid": "Enter a valid e-mail address",
+  "navHome": "Home",
+  "navBooks": "Books",
+  "navLibraries": "Libraries",
+  "navProfile": "Profile"
+}

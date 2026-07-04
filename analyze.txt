@@ -1,0 +1,62 @@
+Analyzing liblibeapp...                                         
+
+  error - Invalid constant value - lib\screens\add_book_screen.dart:545:42 - invalid_constant
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\book_detail.dart:258:49 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\book_detail.dart:576:19 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\screens\book_detail.dart:584:39 - use_build_context_synchronously
+  error - Invalid constant value - lib\screens\book_detail.dart:1060:38 - invalid_constant
+  error - Invalid constant value - lib\screens\book_detail.dart:1124:38 - invalid_constant
+  error - Invalid constant value - lib\screens\book_detail.dart:1131:40 - invalid_constant
+  error - Invalid constant value - lib\screens\books.dart:500:40 - invalid_constant
+  error - Invalid constant value - lib\screens\books.dart:655:42 - invalid_constant
+  error - Invalid constant value - lib\screens\books.dart:715:40 - invalid_constant
+  error - Invalid constant value - lib\screens\books.dart:750:40 - invalid_constant
+   info - Statements in an if should be enclosed in a block - lib\screens\books.dart:820:39 - curly_braces_in_flow_control_structures
+warning - The value of the local variable 'isDark' isn't used - lib\screens\dashboard_screen.dart:42:15 - unused_local_variable
+   info - Unnecessary use of multiple underscores - lib\screens\edit_profile_screen.dart:197:47 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\screens\edit_profile_screen.dart:197:51 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\screens\edit_profile_screen.dart:513:37 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\screens\edit_profile_screen.dart:513:41 - unnecessary_underscores
+warning - The value of the local variable 'isDark' isn't used - lib\screens\home.dart:77:11 - unused_local_variable
+  error - Invalid constant value - lib\screens\libraries.dart:418:40 - invalid_constant
+  error - Invalid constant value - lib\screens\libraries.dart:530:42 - invalid_constant
+  error - Invalid constant value - lib\screens\libraries.dart:578:40 - invalid_constant
+  error - Invalid constant value - lib\screens\libraries.dart:613:40 - invalid_constant
+   info - Statements in an if should be enclosed in a block - lib\screens\libraries.dart:675:39 - curly_braces_in_flow_control_structures
+  error - Invalid constant value - lib\screens\libraries.dart:784:42 - invalid_constant
+  error - Invalid constant value - lib\screens\libraries.dart:833:40 - invalid_constant
+  error - Invalid constant value - lib\screens\libraries.dart:868:40 - invalid_constant
+   info - Statements in an if should be enclosed in a block - lib\screens\libraries.dart:938:39 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\screens\libraries.dart:1009:19 - curly_braces_in_flow_control_structures
+  error - Invalid constant value - lib\screens\library_detail.dart:218:24 - invalid_constant
+  error - Invalid constant value - lib\screens\list_detail.dart:254:24 - invalid_constant
+  error - Invalid constant value - lib\screens\list_detail.dart:846:40 - invalid_constant
+  error - Invalid constant value - lib\screens\list_detail.dart:963:42 - invalid_constant
+  error - Invalid constant value - lib\screens\list_detail.dart:1022:40 - invalid_constant
+  error - Invalid constant value - lib\screens\list_detail.dart:1057:40 - invalid_constant
+  error - Invalid constant value - lib\screens\lists.dart:537:42 - invalid_constant
+  error - Invalid constant value - lib\screens\lists.dart:585:40 - invalid_constant
+  error - Invalid constant value - lib\screens\lists.dart:620:40 - invalid_constant
+   info - Don't use 'BuildContext's across async gaps - lib\screens\login_screen.dart:195:41 - use_build_context_synchronously
+  error - Invalid constant value - lib\widgets\create_list_bottom_sheet.dart:90:40 - invalid_constant
+  error - Invalid constant value - lib\widgets\create_list_bottom_sheet.dart:141:38 - invalid_constant
+  error - Invalid constant value - lib\widgets\create_list_bottom_sheet.dart:177:38 - invalid_constant
+  error - Invalid constant value - lib\widgets\expandable_search_icon.dart:439:18 - invalid_constant
+  error - The default value of an optional parameter must be constant - lib\widgets\expandable_search_icon.dart:546:23 - non_constant_default_value
+  error - Invalid constant value - lib\widgets\filter_chips_row.dart:87:22 - invalid_constant
+  error - Invalid constant value - lib\widgets\filter_chips_row.dart:98:22 - invalid_constant
+   info - Unnecessary use of multiple underscores - lib\widgets\floating_nav_bar.dart:533:31 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\widgets\floating_nav_bar.dart:533:35 - unnecessary_underscores
+  error - Undefined name 'context' - lib\widgets\glass_bottom_sheet.dart:245:39 - undefined_identifier
+   info - Unnecessary use of multiple underscores - lib\widgets\glass_sidebar.dart:286:31 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\widgets\glass_sidebar.dart:286:35 - unnecessary_underscores
+   info - The 'if' statement could be replaced by a null-aware assignment - lib\widgets\import_excel_sheet.dart:121:11 - prefer_conditional_assignment
+   info - Don't use 'BuildContext's across async gaps - lib\widgets\import_excel_sheet.dart:152:21 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\widgets\import_excel_sheet.dart:154:28 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\widgets\import_excel_sheet.dart:157:28 - use_build_context_synchronously
+  error - Invalid constant value - lib\widgets\import_excel_sheet.dart:236:38 - invalid_constant
+  error - Invalid constant value - lib\widgets\import_excel_sheet.dart:279:38 - invalid_constant
+  error - Invalid constant value - lib\widgets\reading_calendar.dart:231:26 - invalid_constant
+  error - Undefined name 'context' - lib\widgets\universal_search_delegate.dart:118:18 - undefined_identifier
+warning - The value of the local variable 'isDark' isn't used - lib\widgets\universal_search_field.dart:237:11 - unused_local_variable
+

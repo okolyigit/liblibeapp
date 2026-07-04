@@ -1,0 +1,205 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // =========================================
+    // HELPER FUNCTIONS
+    // =========================================
+    
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Check if user is the owner
+    function isOwner(ownerId) {
+      return isAuthenticated() && request.auth.uid == ownerId;
+    }
+    
+    // Check if user is a member of a library
+    function isLibraryMember(libraryId) {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/libraries/$(libraryId)) &&
+        request.auth.uid in get(/databases/$(database)/documents/libraries/$(libraryId)).data.members;
+    }
+
+    // Admin check via Firebase Auth custom claim (set only by the setUserRole
+    // Cloud Function / Admin SDK). No Firestore get() needed, and clients can
+    // never forge it.
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.role == 'admin';
+    }
+
+    // =========================================
+    // USER PROFILES
+    // =========================================
+    match /users/{userId} {
+      // Allow users to read other profiles (needed for searching by email/invites
+      // and for the admin role-management screen)
+      allow read: if isAuthenticated();
+
+      // Create own profile, but never self-assign an elevated role.
+      allow create: if isOwner(userId) &&
+        (!('role' in request.resource.data) || request.resource.data.role == 'user');
+
+      // Owners may update their own profile but NOT the 'role' field. Roles are
+      // changed ONLY by the setUserRole Cloud Function (Admin SDK, which bypasses
+      // these rules) — so no client, not even an admin's app, can write a role
+      // directly. This fully closes privilege escalation.
+      allow update: if isOwner(userId) &&
+        request.resource.data.get('role', 'user') == resource.data.get('role', 'user');
+
+      // Account deletion removes the user's own profile document.
+      allow delete: if isOwner(userId);
+      
+      // User-specific reading progress - ONLY the user can access their own progress
+      match /book_progress/{bookId} {
+        allow read, write: if isOwner(userId);
+      }
+      
+      // Notifications - User can access own, others can CREATE (for invites)
+      match /notifications/{notificationId} {
+        allow read, update, delete: if isOwner(userId);
+        allow create: if isAuthenticated(); // Allow anyone to send notification (invite)
+      }
+    }
+    
+    // =========================================
+    // LIBRARIES
+    // =========================================
+    match /libraries/{libraryId} {
+      // Only members can read library details
+      allow read: if isAuthenticated() && (
+        resource.data.ownerId == request.auth.uid ||
+        request.auth.uid in resource.data.members
+      );
+      
+      // Any authenticated user can create a library
+      allow create: if isAuthenticated() && 
+        request.resource.data.ownerId == request.auth.uid &&
+        request.auth.uid in request.resource.data.members;
+      
+      // Owner can delete
+      allow delete: if isOwner(resource.data.ownerId);
+      
+      // Owner can update all fields, members can only update 'members' array (join/leave)
+      allow update: if isAuthenticated() && (
+        resource.data.ownerId == request.auth.uid || 
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members', 'updatedAt'])
+      );
+    }
+    
+    // =========================================
+    // BOOKS
+    // =========================================
+    match /books/{bookId} {
+      // Helper: Check if user is the library owner
+      function isLibraryOwner() {
+        return isAuthenticated() && 
+          exists(/databases/$(database)/documents/libraries/$(resource.data.libraryId)) &&
+          get(/databases/$(database)/documents/libraries/$(resource.data.libraryId)).data.ownerId == request.auth.uid;
+      }
+      
+      // Only library members can read books
+      allow read: if isAuthenticated() && (
+        resource.data.ownerId == request.auth.uid ||
+        isLibraryMember(resource.data.libraryId)
+      );
+      
+      // Book creator must set ownerId to themselves and be member of target library
+      allow create: if isAuthenticated() && 
+        request.resource.data.ownerId == request.auth.uid &&
+        isLibraryMember(request.resource.data.libraryId);
+      
+      // Book owner, library owner, or addedBy user can update/delete
+      allow update, delete: if isAuthenticated() && (
+        resource.data.ownerId == request.auth.uid || 
+        resource.data.addedBy == request.auth.uid ||
+        isLibraryOwner()
+      );
+    }
+    
+    // =========================================
+    // READING LISTS
+    // =========================================
+    match /lists/{listId} {
+      // Only owner can read private lists, anyone can read public lists
+      allow read: if isAuthenticated() && (
+        resource.data.ownerId == request.auth.uid ||
+        resource.data.isPublic == true ||
+        request.auth.uid in resource.data.members
+      );
+      
+      // Any authenticated user can create a list
+      allow create: if isAuthenticated() && 
+        request.resource.data.ownerId == request.auth.uid;
+      
+      // Only owner can update/delete
+      allow update, delete: if isOwner(resource.data.ownerId);
+    }
+    
+    // =========================================
+    // LIKES (FAVORITES)
+    // =========================================
+    match /likes/{likeId} {
+      // Only owner can read their likes
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Any authenticated user can create a like with their userId
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      
+      // Only owner can update/delete
+      allow update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // =========================================
+    // READING ACTIVITIES (Calendar)
+    // =========================================
+    match /reading_activities/{activityId} {
+      // Only owner can read their activities
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Any authenticated user can create an activity with their userId
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      
+      // Only owner can update/delete
+      allow update, delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+
+    // =========================================
+    // ISBN LOOKUP CACHE
+    // =========================================
+    // Populated only by the lookupIsbnFallback Cloud Function (admin SDK
+    // bypasses these rules). Clients must never read or write directly —
+    // they call the function, which returns the cached payload.
+    match /books_cache/{isbn} {
+      allow read, write: if false;
+    }
+
+    // =========================================
+    // AUDIT LOGS (role changes, etc.)
+    // =========================================
+    // Written ONLY by Cloud Functions (Admin SDK bypasses rules). Admins may
+    // read for accountability; clients may never write.
+    match /audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // =========================================
+    // SHOPPING LIST ITEMS
+    // =========================================
+    match /shopping_items/{itemId} {
+      // Only owner can read their shopping items
+      allow read: if isAuthenticated() && resource.data.ownerId == request.auth.uid;
+      
+      // Any authenticated user can create a shopping item with their ownerId
+      allow create: if isAuthenticated() && request.resource.data.ownerId == request.auth.uid;
+      
+      // Only owner can update/delete
+      allow update, delete: if isAuthenticated() && resource.data.ownerId == request.auth.uid;
+    }
+
+  }
+}

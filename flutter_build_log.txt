@@ -1,0 +1,54 @@
+﻿Running Gradle task 'assembleRelease'...                        
+Font asset "Phosphor-Bold.ttf" was tree-shaken, reducing it from 495308 to 1056 bytes (99.8% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "Phosphor-Fill.ttf" was tree-shaken, reducing it from 449252 to 5756 bytes (98.7% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "Phosphor.ttf" was tree-shaken, reducing it from 488636 to 18776 bytes (96.2% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 2072 bytes (99.9% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+flutter : 
+At line:1 char:1
++ flutter build apk --relea
+se 2>&1 | Out-File -FilePat
+h flutter_build_l ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (:St  
+  ring) [], RemoteExcept   
+ ion
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+FAILURE: Build failed with 
+an exception.
+
+* What went wrong:
+Execution failed for task '
+:file_picker:lintVitalAnaly
+zeRelease'.
+> java.nio.file.FileSystemE
+xception: C:\Projects\libli
+beapp\build\file_picker\int
+ermediates\lint-cache\lintV
+italAnalyzeRelease\migrated
+-jars\androidx.lifecycle.li
+nt.LiveDataCoreIssueRegistr
+y-32b654e6cacc2c23..jar: Do
+sya ba┼şka bir i┼şlem taraf
+─▒ndan kullan─▒ld─▒─ş─▒ndan
+ bu i┼şlem dosyaya eri┼şemi
+yor
+
+* Try:
+> Run with --stacktrace opt
+ion to get the stack trace.
+> Run with --info or --debu
+g option to get more log ou
+tput.
+> Run with --scan to get fu
+ll insights.
+> Get more help at https://
+help.gradle.org.
+
+BUILD FAILED in 9s
+Running Gradle task 'assembleRelease'...                            9,6s
+Gradle task assembleRelease
+ failed with exit code 1

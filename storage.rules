@@ -1,0 +1,26 @@
+rules_version = '2';
+
+// Cloud Storage security rules for Liblibe.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Book cover images. Path: covers/{ownerId}/{bookId}.jpg
+    match /covers/{ownerId}/{fileName} {
+      // Any signed-in user may view covers.
+      allow read: if request.auth != null;
+
+      // Only the owner may write, and only if their custom-claim role is
+      // 'premium' or 'admin' (set server-side by setUserRole — clients can't
+      // forge it, and no Firestore read is needed). Limited to small image
+      // files so the free Storage quota lasts (covers are resized to ~1024px /
+      // JPEG ~80% before upload, typically well under 100 KB).
+      allow write: if request.auth != null
+        && request.auth.uid == ownerId
+        && request.auth.token.role in ['premium', 'admin']
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    // Everything else is denied by default.
+  }
+}

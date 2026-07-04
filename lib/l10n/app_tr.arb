@@ -1,0 +1,18 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Liblibe",
+  "actionCancel": "İptal",
+  "actionOk": "Tamam",
+  "actionDelete": "Sil",
+  "actionSave": "Kaydet",
+  "actionRetry": "Tekrar dene",
+  "genericErrorTitle": "Bir şeyler ters gitti",
+  "offline": "İnternet bağlantısı yok",
+  "validationRequiredField": "Boş bırakılamaz",
+  "validationEmailRequired": "E-posta adresi gerekli",
+  "validationEmailInvalid": "Geçerli bir e-posta adresi girin",
+  "navHome": "Ana Sayfa",
+  "navBooks": "Kitaplar",
+  "navLibraries": "Kütüphaneler",
+  "navProfile": "Profil"
+}
